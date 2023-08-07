@@ -18,14 +18,15 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection){
     let lowerCasePlayerSelection = playerSelection.toLowerCase();
+    let lowerCaseComputerSelection = computerSelection.toLowerCase();
 
-    if (lowerCasePlayerSelection === computerSelection)
+    if (lowerCasePlayerSelection === lowerCaseComputerSelection)
     {
         return 'tie';
     }
     else if (lowerCasePlayerSelection === "paper")
     {
-        if (computerSelection === "scissors")
+        if (lowerCaseComputerSelection === "scissors")
         {
             return 'lose';
         }
@@ -34,7 +35,7 @@ function playRound(playerSelection, computerSelection){
     }
     else if (lowerCasePlayerSelection === "rock")
     {
-        if (computerSelection === "scissors")
+        if (lowerCaseComputerSelection === "scissors")
         {
             return 'win';
         }
@@ -43,7 +44,7 @@ function playRound(playerSelection, computerSelection){
     }
     else if (lowerCasePlayerSelection === "scissors")
     {
-        if (computerSelection === "rock")
+        if (lowerCaseComputerSelection === "rock")
         {
             return 'lose';
         }
@@ -58,9 +59,10 @@ function game(){
 
     for (let i = 1; i <= 5; i++)
     {   
-        const playerSelection = prompt("Choose your move: rock/paper/scissors");
-        const computerSelection = getComputerChoice();
-        
+        let playerSelection = prompt("Choose your move: rock/paper/scissors");
+        let computerSelection = getComputerChoice();
+        playerSelection = makeFirstLetterUCase(playerSelection);
+        computerSelection = makeFirstLetterUCase(computerSelection);
         switch (playRound(playerSelection, computerSelection)){
             case 'tie':
                 console.log(`It's a tie! You both chose ${computerSelection}`);
@@ -86,4 +88,10 @@ function game(){
     }
 }
 
+function makeFirstLetterUCase(a){
+    let b = a.replace(a.charAt(0),a.charAt(0).toUpperCase());
+    return b;
+}
+
 game();
+
